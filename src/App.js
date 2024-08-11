@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Navbar/>
-      <Data onsent={HandleSent} />
+      <Data />
     </div>
   );
 }
