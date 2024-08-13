@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-export default function Data({ recievedData }) {
-  const [data, setData] = useState([]);
-  const [sortedData, setSortedData] = useState([]);
+export default function Data({ recievedData, searchedData }) {        // "recievedData" is recieved from navBar
+  const [data, setData] = useState([]);                 //making two null arrays, this
+  const [sortedData, setSortedData] = useState([]);     //and that
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -12,9 +12,9 @@ export default function Data({ recievedData }) {
         if (!response.ok) {
           throw new Error("Network Error."); // Error with capital E
         }
-        const temp = await response.json();
-        setData(temp);
-        setSortedData(temp);
+        const temp = await response.json();         //api data is assigned to the temp
+        setData(temp);                              //storing the same data of api
+        setSortedData(temp);                        //on both of the arrays
       } catch (error) {
         setError(error);
       }
@@ -22,6 +22,8 @@ export default function Data({ recievedData }) {
     fetchData();
   }, []);
 
+  //now comparing and sorting the name, age, rank of "data" array, meanwhile "sortedData" is being showed in the page initially.
+  //and after the "data" array is sorted, It is assigned to the "sortedData"
   useEffect(() => {
     const sortedStudents = [...data].sort((a, b) => {
       if (recievedData === "name") {
@@ -36,8 +38,21 @@ export default function Data({ recievedData }) {
         return a.id - b.id;
       }
     });
-    setSortedData(sortedStudents);
-  }, [recievedData]);
+    setSortedData(sortedStudents);      //"sortedData" assigned to the sorted "Data" array.
+  }, [recievedData]);       //when ever the option/data of recievedData is changed, the useEffect runs.
+  
+  useEffect(() => {
+    if (searchedData) {
+      const filteredData = data.filter(item =>
+        item.name.toLowerCase().includes(searchedData.toLowerCase()) // Filtering by the 'name' property
+      );
+      setSortedData(filteredData);
+    } else {
+      setSortedData(data);  
+    }
+  }, [searchedData, data]);
+  
+
 
   return (
     <div className="static mt-16">

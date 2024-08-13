@@ -4,7 +4,12 @@ import Data from "../Data";
 
 export default function Navbar() {
   const [sort, setsort] = useState("rank");
+  const [searchVal, setSearchVal] = useState('')
 
+  function HandleSearch(e){
+    const SearchData= e.target.value;
+    setSearchVal(SearchData);
+  }
   function HandleSelect(e) {
     const data = e.target.value;
     setsort(data);
@@ -21,7 +26,7 @@ export default function Navbar() {
             <option value="name">Name</option>
             <option value="age">Age</option>
           </select>
-          <input placeholder="Search" type="search" className="m-3 mr-0 p-1 rounded-s-lg" />
+          <input onChange={HandleSearch} placeholder="Search" type="search" value={searchVal} className="m-3 mr-0 p-1 rounded-s-lg" />
           <button className="bg-gray-200 text-black ml-0 rounded-r-lg">
             <img
               src="https://cdn0.iconfinder.com/data/icons/art-designing-glyph/2048/1871_-_Magnifier-512.png"
