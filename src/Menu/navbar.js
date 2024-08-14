@@ -26,7 +26,7 @@ export default function Navbar() {
             <option value="name">Name</option>
             <option value="age">Age</option>
           </select>
-          <input onChange={HandleSearch} placeholder="Search" type="search" value={searchVal} className="m-3 mr-0 p-1 rounded-s-lg" />
+          <input placeholder="Search" type="search" value={searchVal} onChange={HandleSearch} className="m-3 mr-0 p-1 rounded-s-lg" />
           <button className="bg-gray-200 text-black ml-0 rounded-r-lg">
             <img
               src="https://cdn0.iconfinder.com/data/icons/art-designing-glyph/2048/1871_-_Magnifier-512.png"
@@ -50,7 +50,7 @@ export default function Navbar() {
         </div>
       </nav>
     </div>
-    <Data recievedData={sort}/>
+    <Data recievedData={sort} searchedData={searchVal} />
     </>
   );
 }
